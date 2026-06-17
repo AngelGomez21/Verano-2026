@@ -1,15 +1,6 @@
 //Reglas
-const 
-
-
-
-
-
-
-
-
-
-
+const cursosDesarrollo=curso=>curso.categoria==="Desarrollo";
+const certificadoTrue=cursos=>curso.tieneCertificado===true;
 //combinaciones
 const desarrolloAndCertificado=curso=>
     cursoDesarrollo(curso) && certificadoTrue(curso);
