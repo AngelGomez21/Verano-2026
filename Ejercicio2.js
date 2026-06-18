@@ -16,65 +16,44 @@ console.log('¿Abraham es padre de Juan?',sonfamilia);
 
 
 //quien es el padre de luis
-function obtenerP(NHijo) {
-    const relacion = hechos.find(
-        dato => dato.hijo === NHijo
-    );
+const esHijo = familiar => familiar.hijo === "Luis";
 
-    return relacion.padre;
-}
+const obtenerP = hechos.find(esHijo);
 
-console.log("¿Quien es el padre de Luis?",obtenerP("Luis"));
+console.log("¿Quién es el padre de Luis?", obtenerP.padre);
 
 //quienes son los hijos de juan
-function hijos(nombreP) {
+const esPadre = familiar => familiar.padre === "Juan";
 
-    const relaciones = hechos.filter(
-        dato => dato.padre === nombreP
-    );
+const hijosDeJuan = hechos.filter(esPadre);
 
-    return relaciones.map(
-        relacion => relacion.hijo
-    );
-}
+const nombresHijos = hijosDeJuan.map(
+    familiar => familiar.hijo
+);
 
-console.log("Hijos de Juan:", hijos("Juan"));
+console.log("Hijos de Juan:", nombresHijos);
 
 //Dos personas son hermanos si tienen el mismo padre y son personas diferentes. 
-function sonH(persona1, persona2) {
+const esHijo1 = familiar => familiar.hijo === "Luis";
+const esHijo2 = familiar => familiar.hijo === "Pedro";
 
-    const padre1 = hechos.find(
-        dato => dato.hijo === persona1
-    );
+const padre1 = hechos.find(esHijo1);
+const padre2 = hechos.find(esHijo2);
 
-    const padre2 = hechos.find(
-        dato => dato.hijo === persona2
-    );
+const sonHermanos = padre1.padre === padre2.padre &&
+                    padre1.hijo !== padre2.hijo;
 
-    return padre1.padre === padre2.padre &&
-           persona1 !== persona2;
-}
-console.log(
-    sonH("Luis","Pedro")
-);
+console.log("¿Luis y Pedro son hermanos?", sonHermanos);
 
 //A es abuelo de C, Si A es padre de B y B es padre de C. 
-function esAbuelo(abuelo, nieto) {
+const esNieto = familiar => familiar.hijo === "Luis";
 
-    const padreDelNieto = hechos.find(
-        dato => dato.hijo === nieto
-    );
+const padreDelNieto = hechos.find(esNieto);
 
-    if (!padreDelNieto) {
-        return false;
-    }
+const esHijoDelAbuelo = familiar =>
+    familiar.padre === "Abraham" &&
+    familiar.hijo === padreDelNieto.padre;
 
-    return hechos.some(
-        dato =>
-            dato.padre === abuelo &&
-            dato.hijo === padreDelNieto.padre
-    );
-}
-console.log(
-    esAbuelo("Abraham","Luis")
-);
+const abuelo = hechos.some(esHijoDelAbuelo);
+
+console.log("¿Abraham es abuelo de Luis?", abuelo);
