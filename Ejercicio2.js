@@ -4,15 +4,16 @@ const hechos=[
     { padre: 'Abraham', hijo: 'Juan'} 
 ]
 //Abran es padre de juan
-function esPadre(nombrePadre, nombreHijo) {
-    return hechos.some(
-        relacion =>
-            relacion.padre === nombrePadre &&
-            relacion.hijo === nombreHijo
-    );
-}
+const espadre = familiar => familiar.padre === "Abraham"
+const hijo = familiar => familiar.hijo === "Juan"
 
-console.log("¿Abraham es padre de Juan?",esPadre("Abraham", "Juan"));
+const pdrhijo = familiar =>
+    espadre(familiar) && hijo(familiar);
+
+const sonfamilia = hechos.some(pdrhijo);
+console.log('¿Abraham es padre de Juan?',sonfamilia);
+
+
 
 //quien es el padre de luis
 function obtenerP(NHijo) {
